@@ -5,7 +5,7 @@ from django.urls import path
 urlpatterns = [
     path('', index.index,name='myadmin_index'),
     #admmin url
-    path('user/',user.index,name='myadmin_user_index'),
+    path('user/<int:pIndex>',user.index,name='myadmin_user_index'),
     path('user/add',user.add,name='myadmin_user_add'),
     path('user/insert',user.insert,name='myadmin_user_insert'),
     path('user/del/<int:uid>',user.delete,name="myadmin_user_delete"),

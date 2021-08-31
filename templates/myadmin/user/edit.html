@@ -1,0 +1,27 @@
+{% extends 'myadmin/base.html'%}
+{%block main_body%} 
+<form action="{%url 'myadmin_user_insert'%}" method='post'>
+    {%csrf_token%}
+<div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">Edit Form</h3>
+    </div>
+    <div class="box-body">
+        <label>name:<input class="form-control" name="username" type="text" placeholder=""></label>
+        <br>
+        <label>password:<input class="form-control" name="password" 
+            type="password" placeholder="your password">
+        </label>
+        <br>
+        <label>password again:<input class="form-control" name="re_password" type="password" placeholder="input password again"></label>
+        <br>
+        
+        
+    </div>
+    <!-- /.box-body -->
+</div>
+<div class="box-footer">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</form>
+{%endblock%}
