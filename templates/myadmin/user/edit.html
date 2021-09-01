@@ -1,20 +1,30 @@
 {% extends 'myadmin/base.html'%}
 {%block main_body%} 
-<form action="{%url 'myadmin_user_insert'%}" method='post'>
+<form action="{%url 'myadmin_user_update' user.id%}" method='post'>
     {%csrf_token%}
 <div class="box box-success">
     <div class="box-header with-border">
         <h3 class="box-title">Edit Form</h3>
     </div>
     <div class="box-body">
-        <label>name:<input class="form-control" name="username" type="text" placeholder=""></label>
+        <div class="callout callout-info">
+            <h4>id:{{user.id}}</h4>
+        </div>
+        <label>name:<input class="form-control" name="username" type="text" value="{{user.username}}"></label>
         <br>
-        <label>password:<input class="form-control" name="password" 
-            type="password" placeholder="your password">
-        </label>
+        <label>create time:{{user.create_at|date:"Y-m-d H:i:s"}}</label>
         <br>
-        <label>password again:<input class="form-control" name="re_password" type="password" placeholder="input password again"></label>
+        <label>update time:{{user.update_at|date:"Y-m-d H:i:s"}}</label>
         <br>
+        <div class="controlssss">
+        <label><input type="radio" name='status' class="inputxlarge" value='1' {%if user.status == 1%}checked{%endif%}>
+        Normal</label>
+        <label>   <input type="radio" name='status' class="inputxlarge" value='2' {%if user.status == 2%}checked{%endif%}>
+        Forbidden</label>
+            <label><input type="radio"  name='status' class="inputxlarge" value='6' {%if user.status == 6%}checked{%endif%}>
+            Admin</label>
+        </div>
+
         
         
     </div>

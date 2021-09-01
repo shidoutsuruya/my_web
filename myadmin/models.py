@@ -8,5 +8,14 @@ class User(models.Model):
     status=models.IntegerField(default=1)
     create_at=models.DateTimeField(default=datetime.now())
     update_at=models.DateTimeField(default=datetime.now())
+    def to_dict(self):
+        return {
+            'id':self.id,'username':self.username,
+                'password_hash':self.password_hash,
+                'password_salt':self.password_salt,
+                'status':self.status,
+                'create_at':self.create_at.strftime("%Y-%m-%d %H:%M:%S"),
+                'update_at':self.update_at.strftime("%Y-%m-%d %H:%M:%S")
+                }
     class Meta:
         db_table='user'

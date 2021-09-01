@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th class="" style="padding-right:0px;">
-                            <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                            <input id="selall" type="checkbox" class="icheckbox_square-blue" >
                         </th>
                         <th class="sorting_asc">ID</th>
                         <th class="text-center">Account</th>
@@ -29,7 +29,9 @@
                 <tbody>
                     {%for user in userlist%}
                     <tr>
-                        <td><div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input name="ids" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div></td>
+                        <td>
+                            <input id="selall" type="checkbox" class="icheckbox_square-blue" >
+                        </td>
                         <td>{{user.id}}</td>
                         <td>{{user.username}}</td>
                         <td>{{user.password_hash}}</td>
@@ -42,7 +44,7 @@
                             {%elif user.status == 3%}
                             <b style="color: rgb(83, 84, 85);">deleted</b>
                             {%elif user.status == 6%}
-                            <b style="color: rgb(8, 131, 255);">unregist</b>
+                            <b style="color: rgb(8, 131, 255);">admin</b>
                             {%else%}
                             <b style="color: rgb(177, 8, 255);">unknown</b>
                             {%endif%}
@@ -74,17 +76,17 @@
                 <div class="form-group form-inline">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default" title="add" onclick="window.location.href ='{%url "myadmin_user_add" %}'"><i class="fa fa-file-o"></i> add</button>
-                        <button type="button" class="btn btn-default" title="delete" ><i class="fa fa-trash-o"></i> delete</button>
+                        <button name='check_all' type="button" class="btn btn-default" title="delete" value='hahahaha'><i class="fa fa-trash-o"></i> delete</button>
                         <button type="button" class="btn btn-default" title="open"><i class="fa fa-check"></i> open</button>
                         <button type="button" class="btn btn-default" title="forbid"><i class="fa fa-ban"></i> forbid</button>
-                        <button type="button" class="btn btn-default" title="refresh"><i class="fa fa-refresh"></i>refresh</button>
+                        <button type="button" class="btn btn-default" title="refresh"><i class="fa fa-refresh"></i> refresh</button>
                     </div>
                 </div>
             </div>
         <form action="{%url 'myadmin_user_index' 1%}" method='get'>
             <div class="box-tools pull-right">
                 <div class="has-feedback">
-                    <input type="text" name="keyword" class="form-control input-sm" placeholder={{keyword}}>
+                    <input type="text" name="keyword" class="form-control input-sm" value={{keyword}}>
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
             </div>

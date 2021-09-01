@@ -6,6 +6,7 @@ import hashlib
 from datetime import datetime
 import random
 # Create your views here. 
+
 def index(request,pIndex=1,item_per_page=10):
     """search for info"""
     ulist=User.objects.all().exclude(status=3)
@@ -40,13 +41,24 @@ def insert(request):
     try:
         obj=User()
         obj.username=request.POST['username']
+        mysql_content=User.objects.exclude(status=3).get(username='hello').username
+        #check whether have same username in database excluding delete status 
+        if obj.username==mysql_content:
+            context={'info':'have same name, please rename'}
+            return render(request,'myadmin/info.html',context)
+        #twice passcode check
+        if len(request.POST['password'])<6:
+            context={'info':'the length of password must larger than 6'}
+            return render(request,'myadmin/info.html',context)
         if request.POST['re_password']!=request.POST['password']:
             context={'info':'twice password input is not same'}
             return render(request,'myadmin/info.html',context)
+        #password handle
         obj.password_salt=str(random.randint(100000,999999))
         string=request.POST['password']+obj.password_salt
         hash.update(string.encode('utf-8'))#md5
         obj.password_hash=hash.hexdigest()
+        #database 
         obj.status=1
         obj.create_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         obj.update_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -78,7 +90,7 @@ def delete(request,uid=0):
         context={"info":'suceessful'}
     except Exception as err:
         print(err)
-        context={"info":'fail'}
+        context={"info":'fail to delete'}
     print(context)
     return render(request,'myadmin/info.html',context)
 def update(request,uid=0):
