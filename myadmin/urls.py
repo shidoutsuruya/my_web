@@ -1,6 +1,5 @@
 from myadmin.views import index,user
 from django.urls import path
-from captcha_admin import admin
 urlpatterns = [
     path('', index.index,name='myadmin_index'),
     #login url
