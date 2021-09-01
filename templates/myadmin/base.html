@@ -405,9 +405,13 @@
                     <div class="pull-left info">
                         <!--get name from session-->
                         <p>{{request.session.adminuser.username}}</p>
-                       
-                        <a href="#"><i class="fa fa-circle text-success"></i>online</a>
-    
+                        {%if request.session.adminuser.status == 6%}
+                        <i class="fa fa-circle text-success"></i> admin
+                        {%elif request.session.adminuser.status == 1%}
+                        <i class="fa fa-circle text-fail"></i> normal
+                        {%elif request.session.adminuser.status == 9%}
+                        <i class="fa fa-circle text-fail"></i> unknown
+                        {%endif%}
                     </div>
                 </div>
                 <!-- search form -->

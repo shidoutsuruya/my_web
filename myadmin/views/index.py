@@ -52,7 +52,5 @@ def dologin(request):
         context={'info':"login failed"}
     return render(request,'myadmin/index/login.html',context)
 def logout(request):
-    print('request_session is :',request.session)
-    print('request_session adminuser :',request.session['adminuser'])
     del request.session['adminuser']
     return redirect(reverse('myadmin_login'))
