@@ -1,0 +1,71 @@
+{% extends 'myadmin/base.html'%}
+{%block main_body%} 
+<form action="{%url 'myadmin_shop_insert'%}" method='post' enctype="multipart/form-data">
+    {%csrf_token%}
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Shop Form</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-1 control-label">Shop name</label>
+
+                    <div class="col-sm-4">
+                        <input name="name" type="text" class="form-control" id="inputEmail3" placeholder="shop name">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label  class="col-sm-1 control-label">Contact</label>
+
+                    <div class="col-sm-4">
+                        <input name="phone" type="text" class="form-control" id="inputPassword3" placeholder="phone num">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-1 control-label">Address</label>
+
+                    <div class="col-sm-4">
+                        <input name='address' type="text" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>
+                <br><br>
+                <div>
+                <div class="form-group">
+                    <label  for="exampleInputFile" class="col-sm-1 control-label">img file:</label>
+                    
+                    <label class="col-sm-1 control-label"><input  name='img' accept='image/*' type="file" id="exampleInputFile"></label>
+                    <br>
+                    
+                </div>
+                <label class="col-sm-10 control-label" style='color:darkgrey'>Example block-level help text here.</label>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputFile" class="col-sm-1 control-label">logo file:</label>
+                        
+                        <label class="col-sm-1 control-label"><input name='logo' accept='image/*' type="file" id="exampleInputFile"></label>
+                        <br>
+                        
+                    </div>
+                    <label class="col-sm-10 control-label" style='color:darkgrey'>Example block-level help text here.</label>
+                    </div>     
+                
+                
+            
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <!-- /.box-footer -->
+       
+    </div>
+</form>
+{%endblock%}

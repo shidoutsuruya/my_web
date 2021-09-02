@@ -1,0 +1,143 @@
+{% extends 'myadmin/base.html'%}
+{%block main_body%} 
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">列表</h3>
+    </div>
+
+    <div class="box-body">
+
+        <!-- 数据表格 -->
+        <div class="table-box">
+
+            <!--数据列表-->
+            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                <thead>
+                    <tr>
+                        <th class="" style="padding-right:0px;">
+                            <input id="selall" type="checkbox" class="icheckbox_square-blue" >
+                        </th>
+                        <th class="sorting_asc">ID</th>
+                        <th class="text-center">shop name</th>
+                        <th class="text-center">shop picture</th>
+                        <th class="text-center">logo</th>
+                        <th class="text-center">address</th>
+                        <th class="text-center">phone</th>
+                        <th class="sorting_asc">status</th>
+                        <th class="text-center">Create Time</th>
+                        <th class="text-center">Update Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for shop in shoplist%}
+                    <tr>
+                        <td>
+                            <input id="selall" type="checkbox" class="icheckbox_square-blue" >
+                        </td>
+                        <td>{{shop.id}}</td>
+                        <td>{{shop.name}}</td>
+                        <td><img height=20 width=30 src="/static/upload/shop/img/{{shop.cover_pic}}"></td>
+                        <td><img height=20 width=30 src="/static/upload/shop/logo/{{shop.banner_pic}}"></td>
+                        <td>{{shop.address}}</td>
+                        <td>{{shop.phone}}</td>
+                        <td class="text-center">
+                            {%if shop.status == 1%}
+                            <b style="color: rgb(2, 245, 55);">normal</b>
+                            {%elif shop.status == 2%}
+                            <b style="color: rgb(245, 2, 2);">forbidden</b>
+                            {%elif shop.status == 3%}
+                            <b style="color: rgb(83, 84, 85);">deleted</b>
+                            {%else%}
+                            <b style="color: rgb(177, 8, 255);">unknown</b>
+                            {%endif%}
+                        </td>
+                        <td class="text-center">{{shop.create_at|date:'Y-m-d h:i:s'}}</td>
+                        <td class="text-center">{{shop.update_at|date:'Y-m-d h:i:s'}}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn bg-olive btn-xs" onclick="window.location.href ='{%url "myadmin_shop_edit" shop.id%}'" ><i class="fa fa-fw fa-arrow-right"></i>edit</button>
+                            <button type="button" class="btn btn-danger btn-xs" onclick="if(confirm('Are you sure to delete?')==false)return false;location.href='{%url "myadmin_shop_delete" shop.id%}'"></i>delete</button>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+                <!--
+            <tfoot>
+            <tr>
+            <th>Rendering engine</th>
+            <th>Browser</th>
+            <th>Platform(s)</th>
+            <th>Engine version</th>
+            <th>CSS grade</th>
+            </tr>
+            </tfoot>-->
+            </table>
+            <!--数据列表/-->
+
+            <!--工具栏-->
+            <div class="pull-left">
+                <div class="form-group form-inline">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" title="add" onclick="window.location.href ='{%url "myadmin_shop_add" %}'"><i class="fa fa-file-o"></i> add</button>
+                        <button name='check_all' type="button" class="btn btn-default" title="delete" value='hahahaha'><i class="fa fa-trash-o"></i> delete</button>
+                        <button type="button" class="btn btn-default" title="open"><i class="fa fa-check"></i> open</button>
+                        <button type="button" class="btn btn-default" title="forbid"><i class="fa fa-ban"></i> forbid</button>
+                        <button type="button" class="btn btn-default" title="refresh"><i class="fa fa-refresh"></i> refresh</button>
+                    </div>
+                </div>
+            </div>
+        <form action="{%url 'myadmin_shop_index' 1%}" method='get'>
+            <div class="box-tools pull-right">
+                <div class="has-feedback">
+                    <input type="text" name="keyword" class="form-control input-sm" value={{keyword}}>
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+            </div>
+        </form>
+            <!--工具栏/-->
+
+        </div>
+        <!-- 数据表格 /-->
+
+
+    </div>
+    <!-- /.box-body -->
+
+    <!-- .box-footer-->
+    <div class="box-footer">
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                all pages:{{maxpages}},
+                all items:{{items_count}} items per page
+                <select class="form-control">
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+        </select> 
+            </div>
+        </div>
+
+        <div class="box-tools pull-right">
+            <ul class="pagination">
+                <li>
+                    <a href="{%url 'myadmin_shop_index' 1 %}?{{mywhere|join:'&'}}" aria-label="Previous">first page</a>
+                </li>
+                <li><a href="{%url 'myadmin_shop_index' pIndex|add:-1 %}?{{mywhere|join:'&'}}">page up</a></li>
+        
+                {%for p in plist%}
+                <li {%if p == pIndex %}class='active'{%endif%}><a href="{%url 'myadmin_shop_index' p %}?{{mywhere|join:'&'}}">{{p}}</a></li>
+                {%endfor%}
+        
+                <li><a href="{%url 'myadmin_shop_index' pIndex|add:1 %}?{{mywhere|join:'&'}}">page down</a></li>
+                <li>
+                    <a href="{%url 'myadmin_shop_index' maxpages %}?{{mywhere|join:'&'}}" aria-label="Next">end page</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- /.box-footer-->
+
+
+
+</div>
+{%endblock%}

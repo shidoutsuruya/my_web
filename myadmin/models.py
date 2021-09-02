@@ -19,3 +19,30 @@ class User(models.Model):
                 }
     class Meta:
         db_table='user'
+        
+class Shop(models.Model):
+    name=models.CharField(max_length=255)
+    cover_pic=models.CharField(max_length=255)
+    banner_pic=models.CharField(max_length=255)
+    address=models.CharField(max_length=255)
+    phone=models.CharField(max_length=255)
+    status=models.IntegerField(1)
+    create_at=models.DateTimeField()
+    update_at=models.DateTimeField()
+    def to_dict(self):
+        shopname=self.name.split('-')
+        return {
+            'id':self.id,
+            'name':shopname[0],
+            'shop':shopname[1],
+            'cover_pic':self.cover_pic,
+            'banner_pic':self.banner_pic,
+            'address':self.address,
+            'phone':self.phone,
+            'status':self.status,
+            'create_at':self.create_at,
+            'update_at':self.update_at,
+        }
+    class Meta:
+        db_table='shop'
+    
