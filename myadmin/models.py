@@ -46,3 +46,22 @@ class Shop(models.Model):
     class Meta:
         db_table='shop'
     
+class Category(models.Model):
+    shop_id=models.IntegerField()
+    name=models.CharField(max_length=50)
+    status=models.IntegerField()
+    create_at=models.DateTimeField()
+    update_at=models.DateTimeField()
+    def to_dict(self):
+        dictionary={
+            'shop_id':self.shop_id,
+            'name':self.name,
+            'status':self.status,
+            'create_at':self.create_at,
+            'update_at':self.update_at
+        }
+        return dictionary
+    class Meta:
+        db_table='category'
+    
+    

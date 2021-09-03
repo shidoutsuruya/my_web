@@ -7,53 +7,43 @@
 
     <div class="box-body">
 
-        <!-- 数据表格 -->
         <div class="table-box">
-
-            <!--数据table-->
             <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
                 <thead>
                     <tr>
-                        <th class="" style="padding-right:0px;">
+                        <th  style="padding-right:0px;">
                             <input id="selall" type="checkbox" class="icheckbox_square-blue" >
+                            <span class="text-center">id</span>
                         </th>
-                        <th class="sorting_asc">ID</th>
-                        <th class="text-center">Account</th>
-                        <th class="text-center">Password Hash</th>
-                        <th class="text-center">Password Salt</th>
-                        <th class="sorting">State</th>
+        
+                        <th class="text-center">shop name</th>
+                        <th class="text-center">dish name</th>
+                        <th class="text-center">status</th>
                         <th class="text-center">Create Time</th>
                         <th class="text-center">Update Time</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {%for user in userlist%}
+                    {%for cate in categorylist%}
                     <tr>
                         <td>
                             <input id="selall" type="checkbox" class="icheckbox_square-blue" >
+                            {{cate.id}}
                         </td>
-                        <td>{{user.id}}</td>
-                        <td>{{user.username}}</td>
-                        <td>{{user.password_hash}}</td>
-                        <td>{{user.password_salt}}</td>
-                        <td class="text-center">
-                            {%if user.status == 1%}
-                            <b style="color: rgb(2, 245, 55);">normal</b>
-                            {%elif user.status == 2%}
-                            <b style="color: rgb(245, 2, 2);">forbidden</b>
-                            {%elif user.status == 3%}
-                            <b style="color: rgb(83, 84, 85);">deleted</b>
-                            {%elif user.status == 6%}
-                            <b style="color: rgb(8, 131, 255);">admin</b>
-                            {%else%}
-                            <b style="color: rgb(177, 8, 255);">unknown</b>
-                            {%endif%}
-                        </td>
-                        <td class="text-center">{{user.create_at|date:'Y-m-d h:i:s'}}</td>
-                        <td class="text-center">{{user.update_at|date:'Y-m-d h:i:s'}}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn bg-olive btn-xs"onclick="window.location.href ='{%url "myadmin_user_edit" user.id%}'" ><i class="fa fa-fw fa-arrow-right"></i>edit</button>
-                            <button type="button" class="btn btn-danger btn-xs" onclick="if(confirm('Are you sure to delete?')==false)return false;location.href='{%url "myadmin_user_delete" user.id%}'"></i>delete</button>
+                        
+                        <td class="text-center">{{cate.shopname}}</td>
+                        <td class="text-center">{{cate.name}}</td>
+                        {%if cate.status == 0%}
+                        <td class="text-center">close</td>
+                        {%elif cate.status == 1%}
+                        <td class="text-center">open</td>
+                        {%endif%}
+                        <td class="text-center">{{cate.create_at|date:'Y-m-d h:i:s'}}</td>
+                        <td class="text-center">{{cate.update_at|date:'Y-m-d h:i:s'}}</td>
+                        <td>
+                            <button type="button" class="btn bg-olive btn-xs" onclick="window.location.href ='{%url "myadmin_category_edit" cate.id %}'" ><i class="fa fa-fw fa-arrow-right"></i>edit</button>
+                            <button type="button" class="btn btn-danger btn-xs" onclick="if(confirm('Are you sure to delete?')==false)return false;location.href='{%url "myadmin_category_delete" cate.id%}'"></i>delete</button>
+                            <button type="button" class="btn bg-orange btn-xs"><i class="fa fa-fw fa-search"></i>detail</button>
                         </td>
                     </tr>
                     {%endfor%}
@@ -75,7 +65,7 @@
             <div class="pull-left">
                 <div class="form-group form-inline">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default" title="add" onclick="window.location.href ='{%url "myadmin_user_add" %}'"><i class="fa fa-file-o"></i> add</button>
+                        <button type="button" class="btn btn-default" title="add" onclick="window.location.href ='{%url "myadmin_category_add" %}'"><i class="fa fa-file-o"></i> add</button>
                         <button name='check_all' type="button" class="btn btn-default" title="delete" value='hahahaha'><i class="fa fa-trash-o"></i> delete</button>
                         <button type="button" class="btn btn-default" title="open"><i class="fa fa-check"></i> open</button>
                         <button type="button" class="btn btn-default" title="forbid"><i class="fa fa-ban"></i> forbid</button>
@@ -83,7 +73,7 @@
                     </div>
                 </div>
             </div>
-        <form action="{%url 'myadmin_user_index' 1%}" method='get'>
+        <form action="{%url 'myadmin_category_index' 1%}" method='get'>
             <div class="box-tools pull-right">
                 <div class="has-feedback">
                     <input type="text" name="keyword" class="form-control input-sm" value={{keyword}}>
@@ -117,17 +107,17 @@
         <div class="box-tools pull-right">
             <ul class="pagination">
                 <li>
-                    <a href="{%url 'myadmin_user_index' 1 %}?{{mywhere|join:'&'}}" aria-label="Previous">first page</a>
+                    <a href="{%url 'myadmin_category_index' 1 %}?{{mywhere|join:'&'}}" aria-label="Previous">first page</a>
                 </li>
-                <li><a href="{%url 'myadmin_user_index' pIndex|add:-1 %}?{{mywhere|join:'&'}}">page up</a></li>
+                <li><a href="{%url 'myadmin_category_index' pIndex|add:-1 %}?{{mywhere|join:'&'}}">page up</a></li>
         
                 {%for p in plist%}
-                <li {%if p == pIndex %}class='active'{%endif%}><a href="{%url 'myadmin_user_index' p %}?{{mywhere|join:'&'}}">{{p}}</a></li>
+                <li {%if p == pIndex %}class='active'{%endif%}><a href="{%url 'myadmin_category_index' p %}?{{mywhere|join:'&'}}">{{p}}</a></li>
                 {%endfor%}
         
-                <li><a href="{%url 'myadmin_user_index' pIndex|add:1 %}?{{mywhere|join:'&'}}">page down</a></li>
+                <li><a href="{%url 'myadmin_category_index' pIndex|add:1 %}?{{mywhere|join:'&'}}">page down</a></li>
                 <li>
-                    <a href="{%url 'myadmin_user_index' maxpages %}?{{mywhere|join:'&'}}" aria-label="Next">end page</a>
+                    <a href="{%url 'myadmin_category_index' maxpages %}?{{mywhere|join:'&'}}" aria-label="Next">end page</a>
                 </li>
             </ul>
         </div>

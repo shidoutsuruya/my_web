@@ -9,9 +9,9 @@
     'Heading': "標題",
     'URL/Link': "超連結",
     'Image': "圖片",
-    'List': "列表",
-    'Unordered List': "無序列表",
-    'Ordered List': "有序列表",
+    'List': "table",
+    'Unordered List': "無序table",
+    'Ordered List': "有序table",
     'Code': "程式碼",
     'Quote': "引用",
     'Preview': "預覽",
@@ -23,7 +23,7 @@
     'enter image description here': "輸入圖片說明",
     'Insert Image Hyperlink': "圖片網址",
     'enter image title here': "輸入圖片標題",
-    'list text here': "在這裡輸入列表文字",
+    'list text here': "在這裡輸入table文字",
     'code text here': "在這裡輸入程式碼",
     'quote here': "在這裡輸入引用"
   };

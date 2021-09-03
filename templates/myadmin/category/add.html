@@ -1,0 +1,35 @@
+{% extends 'myadmin/base.html'%}
+{%block main_body%} 
+<form action="{% url 'myadmin_category_insert' %}" method='post'>
+    {%csrf_token%}
+<div class="box box-success">
+    <div class="box-header with-border">
+        <h3 class="box-title">Form</h3>
+    </div>
+    <div class="box-body">
+        <div class="form-group">
+            <label class='col-sm-2'>shop name</label>
+        
+        <div class="col-sm-3">
+            <select name="shop_id" class="form-control select1">
+                {%for shop_i in shoplist%}
+                <option value="{{shop_i.id}}">{{shop_i.name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class='col-sm-2'>dish name</label>
+            <div class="col-sm-3">
+                <input name='name' class="form-control" type="text" placeholder="Default input">    
+            </div>
+        </div>
+    </div>
+    <!-- /.box-body -->
+</div>
+<div class="box-footer">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</form>
+{%endblock%}
