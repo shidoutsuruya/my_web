@@ -64,4 +64,26 @@ class Category(models.Model):
     class Meta:
         db_table='category'
     
-    
+class product(models.Model):
+    shop_id=models.IntegerField()
+    category_id=models.IntegerField()
+    cover_pic=models.CharField(max_length=50)
+    name=models.TextField()
+    price=models.DecimalField(max_digits=8,decimal_places=2)
+    status=models.IntegerField()
+    create_time=models.DateTimeField()
+    update_time=models.DateTimeField()
+    def to_dict(self):
+        dictionary={
+            'shop_id':self.shop_id,
+            'category_id':self.category_id,
+            'cover_pic':self.cover_pic,
+            'name':self.name,
+            'price':self.price,
+            'status':self.status,
+            'create_time':self.create_time,
+            'update_time':self.update_time
+        }
+        return dictionary
+    class Meta:
+        db_table='product'

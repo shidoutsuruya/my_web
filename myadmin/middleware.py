@@ -13,6 +13,11 @@ class Middleware:
             if 'adminuser' not in request.session:
                 
                 return redirect(reverse("myadmin_login"))
-            
+        #judge if match web exclude url_list
+        if re.match(r'^/web',path):
+            #use session
+            if 'webuser' not in request.session:
+                return redirect(reverse("web_login")) 
+        #end   
         response=self.get_response(request)
         return response

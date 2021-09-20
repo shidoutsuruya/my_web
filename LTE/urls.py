@@ -19,5 +19,5 @@ from captcha_admin import admin
 urlpatterns = [
     path("",include('web.urls')),
     path('myadmin/',include('myadmin.urls')),
-    path('mobile',include('mobile.urls'))
+    path('mobile/',include('mobile.urls'))
 ]

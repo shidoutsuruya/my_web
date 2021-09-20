@@ -1,4 +1,4 @@
-from myadmin.views import index,user,shop,category
+from myadmin.views import index,user,shop,category,product
 from django.urls import path
 urlpatterns = [
     path('', index.index,name='myadmin_index'),
@@ -27,7 +27,14 @@ urlpatterns = [
     path('category/del/<int:cid>',category.delete,name="myadmin_category_delete"),
     path('category/edit/<int:cid>',category.edit,name='myadmin_category_edit'),
     path('category/update/<int:cid>',category.update,name='myadmin_category_update'),
-    
+    path('category/load/<int:sid>',category.loadCategory,name='myadmin_category_load'),
+    #product urls
+    path('product/<int:pIndex>',product.index,name='myadmin_product_index'),
+    path('product/add',product.add,name='myadmin_product_add'),
+    path('product/insert',product.insert,name='myadmin_product_insert'),
+    path('product/del/<int:pid>',product.delete,name="myadmin_product_delete"),
+    path('product/edit/<int:pid>',product.edit,name='myadmin_product_edit'),
+    path('product/update/<int:pid>',product.update,name='myadmin_product_update'),
 ]
 
 handler404=index.page_not_found

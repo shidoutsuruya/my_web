@@ -460,8 +460,8 @@
 
 
                     <li class="treeview">
-                        <a href="#">
-                    <i class="fa fa-edit"></i> <span>Forms</span>
+                        <a href="{%url 'myadmin_product_index' 1%}">
+                    <i class="fa fa-edit"></i> <span>dish</span>
                 </a>
                     </li>
 
@@ -604,7 +604,8 @@
             setSidebarActive("admin-index");
         });
     </script>
-
+{% block loadjavascript %}
+{%endblock%}
 </body>
 
 </html>

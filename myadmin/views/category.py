@@ -1,10 +1,11 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from datetime import datetime
 from myadmin.models import Category,Shop
 
-def index(request,pIndex=1,per_page=10):
+def index(request,pIndex=1,per_page=5):
     ulist=Category.objects.filter(status__lt=9)
     mywhere=[]
     kw=request.GET.get("keyword",None)
@@ -88,3 +89,7 @@ def update(request,cid=0):
         print(err)
         context={'info':'changed failed'}
     return render(request,'myadmin/info.html',context)
+
+def loadCategory(request,sid):
+    clist=Category.objects.filter(status__lt=9,shop_id=sid).values('id','name')
+    return JsonResponse({"data":list(clist)})

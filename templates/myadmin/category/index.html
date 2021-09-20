@@ -43,7 +43,7 @@
                         <td>
                             <button type="button" class="btn bg-olive btn-xs" onclick="window.location.href ='{%url "myadmin_category_edit" cate.id %}'" ><i class="fa fa-fw fa-arrow-right"></i>edit</button>
                             <button type="button" class="btn btn-danger btn-xs" onclick="if(confirm('Are you sure to delete?')==false)return false;location.href='{%url "myadmin_category_delete" cate.id%}'"></i>delete</button>
-                            <button type="button" class="btn bg-orange btn-xs"><i class="fa fa-fw fa-search"></i>detail</button>
+                            <button type="button" class="btn bg-orange btn-xs" onclick="window.location.href ='{%url "myadmin_product_index" 1 %}?category_id={{cate.id}}'"><i class="fa fa-fw fa-search"></i>detail</button>
                         </td>
                     </tr>
                     {%endfor%}

@@ -1,5 +1,13 @@
 from web.views import index
-from django.urls import path
+from django.urls import path,include
 urlpatterns = [
-    path('', index.index,name='web_index'),
+    path('', index.index,name='index'),
+    path('login',index.login,name='web_login'),
+    path('dologin',index.dologin,name='web_dologin'),
+    path('logout',index.logout,name='web_logout'),
+    path('verify',index.verify,name='web_verify'),
+    #request login
+    path('web/',include([
+        path('', index.web_index,name='web_index'),
+    ]))
 ]
