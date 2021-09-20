@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from captcha_admin import admin
 urlpatterns = [
     path("",include('web.urls')),
     path('myadmin/',include('myadmin.urls')),

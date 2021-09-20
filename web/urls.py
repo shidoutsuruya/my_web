@@ -5,7 +5,6 @@ urlpatterns = [
     path('login',index.login,name='web_login'),
     path('dologin',index.dologin,name='web_dologin'),
     path('logout',index.logout,name='web_logout'),
-    path('verify',index.verify,name='web_verify'),
     #request login
     path('web/',include([
         path('', index.web_index,name='web_index'),

@@ -47,19 +47,19 @@
                 <div class="form-group">
                     <label>Select</label>
                     <select class="form-control">
-<option>option 1</option>
-<option>option 2</option>
-<option>option 3</option>
-<option>option 4</option>
-<option>option 5</option>
-</select>
+                    <option>option 1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                    </select>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="account">
+                    <input type="text" class="form-control" placeholder="account" name='username'>
                     <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="password">
+                    <input type="password" class="form-control" placeholder="password" name='pass'>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
@@ -72,6 +72,21 @@
                     <!-- /.col -->
                 </div>
             </form>
+            <div>
+                <p style='color:rgb(197, 18, 18)'>
+                    {% if request.GET.errinfo == '1'%}
+                        please choose your shop name
+                    {% elif request.GET.errinfo == '2'%}
+                        recaptcha wrong
+                    {% elif request.GET.errinfo == '3'%}
+                        account not exist
+                    {% elif request.GET.errinfo == '4'%}
+                        unavailable account
+                    {% elif request.GET.errinfo == '5'%}
+                        password wrong
+                    {%endif%}
+                </p>
+            </div>
 
         </div>
         <!-- /.login-box-body -->
