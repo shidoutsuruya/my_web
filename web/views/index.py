@@ -5,7 +5,7 @@ from django.conf import settings
 import urllib
 import json
 import hashlib
-from web.models import *
+from myadmin.models import User
 # Create your views here.
 def index(request):
     #main idex
