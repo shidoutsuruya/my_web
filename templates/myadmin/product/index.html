@@ -37,7 +37,7 @@
                         <td class="text-center">{{pro.cover_pic}}</td>
                         <td class="text-center">{{pro.name}}</td>      
                         <td class="text-center">{{pro.price}}</td>
-                        <td class="text-center">{{pro.update_time|date:'Y-m-d h:i:s'}}</td>
+                        <td class="text-center">{{pro.update_at|date:'Y-m-d h:i:s'}}</td>
                         <td>
                             <button type="button" class="btn bg-olive btn-xs" onclick="window.location.href ='{%url "myadmin_product_edit" pro.id %}'" ><i class="fa fa-fw fa-arrow-right"></i>edit</button>
                             <button type="button" class="btn btn-danger btn-xs" onclick="if(confirm('Are you sure to delete?')==false)return false;location.href='{%url "myadmin_product_delete" pro.id%}'"></i>delete</button>

@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from datetime import datetime
-from myadmin.models import Category,Shop,product
+from myadmin.models import Category,Shop,Product
 import time,os
 def index(request,pIndex=1,per_page=10):
-    ulist=product.objects.filter(status=1)
+    ulist=Product.objects.filter(status=1)
     mywhere=[]
     kw=request.GET.get("keyword",None)
     if kw:

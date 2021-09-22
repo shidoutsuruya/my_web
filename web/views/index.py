@@ -5,19 +5,26 @@ from django.conf import settings
 import urllib
 import json
 import hashlib
-from myadmin.models import User
+from myadmin.models import User,Shop,Category,Product
 # Create your views here.
 def index(request):
     #main idex
     return redirect(reverse('web_index'))
 def web_index(request):
-    return render(request,"web/index.html")
+    context={'categorylist':request.session.get('categorylist',{}).items()}
+    return render(request,"web/index.html",context)
 def login(request):
-    """join in login"""
-    return render(request,'web/login.html')
-def dologin(request):
-         #recaptcha
+    #option shows
+    shoplist=Shop.objects.filter(status=1)
+    context={'shoplist':shoplist}
+    return render(request,'web/login.html',context)
+def dologin(request):       
     try:
+        #select shop
+        if request.POST['shop_id']=='0':
+            return redirect(reverse('web_login')+'?errinfo=1')
+            
+        #recaptcha
         recaptcha_response=request.POST.get('g-recaptcha-response')
         verify_url='https://www.recaptcha.net/recaptcha/api/siteverify'
         values={
@@ -39,6 +46,25 @@ def dologin(request):
             if user.password_hash==md5.hexdigest():
                 print('successfully login')
                 request.session['webuser']=user.to_dict()
+                #get shop info
+                shopobj=Shop.objects.get(id=request.POST['shop_id'])
+                request.session['shopinfo']=shopobj.to_dict()
+                #get all category
+                clist=Category.objects.filter(shop_id=shopobj.id,status=1)
+                categorylist=dict()
+                productlist=dict()
+                #traverse category info
+                for user in clist:
+                    c={'id':user.id,'name':user.name,'pids':[]}
+                    plist=Product.objects.filter(category_id=user.id,status=1)
+                    #tranverse dish info in present category
+                    for p in plist:
+                        c['pids'].append(p.to_dict())
+                        productlist[p.id]=p.to_dict()
+                    categorylist[user.id]=c
+                #save info into session
+                request.session['categorylist']=categorylist
+                request.session['productlist']=productlist
                 return redirect(reverse("web_index"))
             else:
                 return redirect(reverse('web_login')+'?errinfo=5')

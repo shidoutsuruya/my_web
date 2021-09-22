@@ -40,8 +40,8 @@ class Shop(models.Model):
             'address':self.address,
             'phone':self.phone,
             'status':self.status,
-            'create_at':self.create_at,
-            'update_at':self.update_at,
+            'create_at':self.create_at.strftime("%Y-%m-%d %H:%M:%S"),
+            'update_at':self.update_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
     class Meta:
         db_table='shop'
@@ -57,22 +57,22 @@ class Category(models.Model):
             'shop_id':self.shop_id,
             'name':self.name,
             'status':self.status,
-            'create_at':self.create_at,
-            'update_at':self.update_at
+            'create_at':self.create_at.strftime("%Y-%m-%d %H:%M:%S"),
+            'update_at':self.update_at.strftime("%Y-%m-%d %H:%M:%S")
         }
         return dictionary
     class Meta:
         db_table='category'
     
-class product(models.Model):
+class Product(models.Model):
     shop_id=models.IntegerField()
     category_id=models.IntegerField()
     cover_pic=models.CharField(max_length=50)
     name=models.TextField()
     price=models.DecimalField(max_digits=8,decimal_places=2)
     status=models.IntegerField()
-    create_time=models.DateTimeField()
-    update_time=models.DateTimeField()
+    create_at=models.DateTimeField()
+    update_at=models.DateTimeField()
     def to_dict(self):
         dictionary={
             'shop_id':self.shop_id,
@@ -81,8 +81,8 @@ class product(models.Model):
             'name':self.name,
             'price':self.price,
             'status':self.status,
-            'create_time':self.create_time,
-            'update_time':self.update_time
+            'create_at':self.create_at.strftime("%Y-%m-%d %H:%M:%S"),
+            'update_at':self.update_at.strftime("%Y-%m-%d %H:%M:%S")
         }
         return dictionary
     class Meta:
