@@ -9,29 +9,29 @@
     <style type="text/css">
         body{min-height:2000px;padding-top:70px;}
 
-        .navbar-default{background-color:#ff8800;border-color:#e7e7e7;}
-        .navbar-default .navbar-brand{color:#fff;}
+        .navbar-default{background-color:#faba09;border-color:#b90d0d;}
+        .navbar-default .navbar-brand{color:rgb(223, 14, 14);}
         .navbar-default .navbar-nav > li > a,.navbar-default .navbar-nav > li > a:visited {
-            color: #fff;
+            color: rgb(60, 15, 184);
             width:100px;
             font-size:14px;
             text-align:center;
         }
         .navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:visited,.navbar-default .navbar-nav li a:hover,.navbar-default .navbar-nav > .active > a:hover,.navbar-default .navbar-nav li a:active {
             color:#fff;
-            background-color: #FF4500;
+            background-color: #e1e434;
             width:100px;
             font-size:14px;
             text-align:center;
         }
         
         table tr td{font-size:11px;} 
-        table tr td.price{color:red;}
-        table tr td.num span{color:red;padding:0px 5px}
+        table tr td.price{color:rgb(115, 116, 111);}
+        table tr td.num span{color:rgb(253, 2, 211);padding:0px 5px}
         table tr td.num i{border-width:0px;background-color:#ddd;}  
 
         div.shoplist div.bn{font-size:12px;line-height:25px;}
-        div.shoplist div.bn span.price{color:red;}
+        div.shoplist div.bn span.price{color:rgb(226, 11, 11);}
     </style>
 </head>
 <body>
@@ -46,18 +46,18 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> <span style="font-weight:bold;">田老师红烧肉</span><span style="font-size:14px;">（朝阳将台路店）</span></a>
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> <span style="font-weight:bold;">Italian food</span></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">堂吃点餐</a></li>
-            <li><a href="#about">当前订单</a></li>
-            <li><a href="#contact">历史订单</a></li>
+            <li class="active"><a href="#">take dish</a></li>
+            <li><a href="#about">your order</a></li>
+            <li><a href="#contact">history order</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"> 张无忌</a></li>
-            <li><a href="../navbar-static-top/">退出</a></li>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true">{{request.session.webuser.username}}</a></li>
+            <li><a href="{%url 'web_logout'%}">log out</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -68,14 +68,14 @@
     <div class="container">
         <div class="col-md-4">
             <div class="panel panel-warning">
-                <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> 购 物 车</div>
+                <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>shopping cart</div>
                 <table class="table table-striped">
                         <tr>
-                            <th width="30">序</th>
-                            <th>菜品</th>
-                            <th width="72">数量</th>
-                            <th width="45">单价</th>
-                            <th>删除</th>
+                            <th width="30">order</th>
+                            <th>dish</th>
+                            <th width="72">num</th>
+                            <th width="45">price</th>
+                            <th>delete</th>
                         </tr>
                         <tr>
                             <td>1</td>
@@ -108,20 +108,20 @@
                     </table>
                     
                     <li class="list-group-item">
-                        <b>购买方式: &nbsp; </b>  
+                        <b>buy method: &nbsp; </b>  
                         <input type="radio" name="ptype" checked value="1"> 堂吃 &nbsp; 
                         <input type="radio" name="ptype" value="2"> 打包 &nbsp; 
                     </li>
                     <li class="list-group-item">
-                        <b>支付方式: &nbsp; </b> 
+                        <b>pay method: &nbsp; </b> 
                         <input type="radio" name="bank" checked value="1"> 现金 &nbsp; 
                         <input type="radio" name="bank" value="2"> 支付宝 &nbsp; 
                         <input type="radio" name="bank" value="3"> 微信
                     </li>
 
                     <div class="panel-footer" style="height:50px">
-                        <div style="width:120px;float:left;margin:5px 0px;">合计：￥<span style="color:red;font-weight:bold;">168.00</span> 元</div>
-                        <button type="submit" class="btn btn-warning" style="width:130px;float:right">结 &nbsp; 算</button>
+                        <div style="width:120px;float:left;margin:5px 0px;">amount：￥<span style="color:red;font-weight:bold;">168.00</span> 元</div>
+                        <button type="submit" class="btn btn-warning" style="width:130px;float:right">pay</button>
                     </div>
              
             </div>

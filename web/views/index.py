@@ -17,6 +17,7 @@ def login(request):
     return render(request,'web/login.html')
 def dologin(request):
          #recaptcha
+    try:
         recaptcha_response=request.POST.get('g-recaptcha-response')
         verify_url='https://www.recaptcha.net/recaptcha/api/siteverify'
         values={
@@ -43,10 +44,11 @@ def dologin(request):
                 return redirect(reverse('web_login')+'?errinfo=5')
         else:
             return redirect(reverse('web_login')+'?errinfo=4')
-    
-        #print(err)
-        #return redirect(reverse('web_login')+'?errinfo=3')
+    except Exception as err:
+        print(err)
+        return redirect(reverse('web_login')+'?errinfo=3')
         
             
 def logout(request):
-    pass
+    del  request.session['webuser']
+    return redirect(reverse('web_login'))
