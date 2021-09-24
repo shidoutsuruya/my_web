@@ -54,6 +54,7 @@ class Category(models.Model):
     update_at=models.DateTimeField()
     def to_dict(self):
         dictionary={
+            'id':self.id,
             'shop_id':self.shop_id,
             'name':self.name,
             'status':self.status,
@@ -75,6 +76,7 @@ class Product(models.Model):
     update_at=models.DateTimeField()
     def to_dict(self):
         dictionary={
+            'id':self.id,
             'shop_id':self.shop_id,
             'category_id':self.category_id,
             'cover_pic':self.cover_pic,

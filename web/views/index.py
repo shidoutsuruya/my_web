@@ -11,6 +11,13 @@ def index(request):
     #main idex
     return redirect(reverse('web_index'))
 def web_index(request):
+    #get cartlist from session to sum up price
+    cartlist=request.session.get('cartlist',{})
+    total=0
+    #statistic price
+    for dish in cartlist.values():
+        total+=dish['num']*dish['price']
+    request.session['total']=total
     context={'categorylist':request.session.get('categorylist',{}).items()}
     return render(request,"web/index.html",context)
 def login(request):
@@ -22,8 +29,7 @@ def dologin(request):
     try:
         #select shop
         if request.POST['shop_id']=='0':
-            return redirect(reverse('web_login')+'?errinfo=1')
-            
+            return redirect(reverse('web_login')+'?errinfo=1')       
         #recaptcha
         recaptcha_response=request.POST.get('g-recaptcha-response')
         verify_url='https://www.recaptcha.net/recaptcha/api/siteverify'

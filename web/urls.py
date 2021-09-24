@@ -1,4 +1,4 @@
-from web.views import index
+from web.views import index,cart
 from django.urls import path,include
 urlpatterns = [
     path('', index.index,name='index'),
@@ -8,5 +8,9 @@ urlpatterns = [
     #request login
     path('web/',include([
         path('', index.web_index,name='web_index'),
+        path('cart/add/<str:pid>',cart.add,name='web_cart_add'),
+        path('cart/delete/<str:pid>',cart.delete,name='web_cart_delete'),
+        path('cart/clear',cart.clear,name='web_cart_clear'),
+        path('cart/change',cart.change,name='web_cart_change')
     ]))
 ]
