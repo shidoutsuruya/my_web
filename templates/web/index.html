@@ -91,18 +91,18 @@
                     
                     <li class="list-group-item">
                         <b>buy method: &nbsp; </b>  
-                        <input type="radio" name="ptype" checked value="1"> 堂吃 &nbsp; 
-                        <input type="radio" name="ptype" value="2"> 打包 &nbsp; 
+                        <input type="radio" name="ptype" checked value="1"> eat in&nbsp; 
+                        <input type="radio" name="ptype" value="2"> take away &nbsp; 
                     </li>
                     <li class="list-group-item">
                         <b>pay method: &nbsp; </b> 
-                        <input type="radio" name="bank" checked value="1"> 现金 &nbsp; 
-                        <input type="radio" name="bank" value="2"> 支付宝 &nbsp; 
-                        <input type="radio" name="bank" value="3"> 微信
+                        <input type="radio" name="bank" checked value="1"> cash &nbsp; 
+                        <input type="radio" name="bank" value="2"> Alipay &nbsp; 
+                        <input type="radio" name="bank" value="3"> wechat
                     </li>
                     <div class="panel-footer" style="height:50px">
                         <div style="width:120px;float:left;margin:5px 0px;">amount：￥<span style="color:red;font-weight:bold;">{{request.session.total}}</span></div>                
-                        <button type="submit" class="btn btn-warning" style="width:50px;float:right">pay</button>
+                        <button onclick='dosubmit()' type="submit" class="btn btn-warning" style="width:50px;float:right">pay</button>
                         
                         <button  type='button' onclick="window.location='cart/clear'" class="btn btn-warning" style="width:50px;float:right;color:aqua">clear</button>
                     </div>
@@ -137,6 +137,34 @@
 
     <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
-
+    <script>
+      function dosubmit(){
+        if($("table.table-striped tr").length==1){
+          alert('not select any dish');
+          return
+        }
+        if(!window.confirm('pay the bill?')){
+          return
+        }
+        //whether pay the bill
+        var ptype=$("input[name='ptype']:checked").val();
+        var bank=$("input[name='bank']:checked").val();
+        $.ajax({
+          type:'get',
+          url:'orders/insert',
+          dataType:"text",
+          data:{ptype:ptype,bank:bank},
+          success:function(res){
+            if(res=='yes'){
+            alert('successfully add');
+            window.location.href = "{%url 'web_index'%}";
+          }
+            else{
+              alert('failed');
+            }
+          }
+        });
+      }
+    </script>
 </body>
 </html>

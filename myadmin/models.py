@@ -89,3 +89,35 @@ class Product(models.Model):
         return dictionary
     class Meta:
         db_table='product'
+class Orders(models.Model):
+    shop_id=models.IntegerField()
+    member_id=models.IntegerField()
+    user_id=models.IntegerField()
+    money=models.FloatField()
+    status=models.IntegerField(default=1)
+    payment_status=models.IntegerField(default=1)
+    create_at=models.DateTimeField()
+    update_at=models.DateTimeField()
+    class Meta:
+        db_table='orders'
+class OrderDetail(models.Model):
+    order_id=models.IntegerField()
+    product_id=models.IntegerField()
+    product_name=models.CharField(max_length=50)
+    price=models.FloatField()
+    quantity=models.IntegerField()
+    status=models.IntegerField(default=1)
+    class Meta:
+        db_table='order_detail'
+class Payment(models.Model):
+    order_id=models.IntegerField()
+    member_id=models.IntegerField()
+    money=models.FloatField()
+    type=models.IntegerField()
+    bank=models.IntegerField(default=1)
+    status=models.IntegerField(default=1)
+    create_at=models.DateTimeField(default=datetime.now)
+    update_at=models.DateTimeField(default=datetime.now)
+    class Meta:
+        db_table='payment'
+    
