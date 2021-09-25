@@ -13,6 +13,8 @@ urlpatterns = [
         path('cart/clear',cart.clear,name='web_cart_clear'),
         path('cart/change',cart.change,name='web_cart_change'),
         #order handle
+        path('orders/<int:pIndex>',orders.index,name='web_order_index'),
         path('orders/insert',orders.insert,name='web_orders_insert')
+        
     ]))
 ]
