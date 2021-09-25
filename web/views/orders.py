@@ -75,6 +75,17 @@ def insert(request):
         print(err)
         return HttpResponse('no')
 def detail(request):
-    pass
+    oid=request.GET.get('oid',0)
+    dlist=OrderDetail.objects.filter(order_id=oid)
+    context={"detaillist":dlist}
+    return render(request,'web/detail.html',context)
 def status(request):
-    pass
+    try:
+        oid=request.GET.get('oid',0)
+        ob=Orders.objects.filter(id=oid)
+        ob.status=request.GET['status']
+        ob.save()
+        return HttpResponse('YES')
+    except Exception as err:
+        print(err)
+        return HttpResponse('NO')
